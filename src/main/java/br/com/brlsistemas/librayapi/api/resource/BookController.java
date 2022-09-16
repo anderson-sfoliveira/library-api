@@ -37,6 +37,13 @@ public class BookController {
         return modelMapper.map(savedBook, BookDTO.class);
     }
 
+    @GetMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public BookDTO get(@PathVariable Long id) {
+        Book book = bookService.getById(id).get();
+        return modelMapper.map(book, BookDTO.class);
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiErrors handleValidationExceptions(MethodArgumentNotValidException ex) {
@@ -49,23 +56,4 @@ public class BookController {
     public ApiErrors handleBusinessException(BusinessException ex) {
         return new ApiErrors(ex);
     }
-
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public BookDTO create(@RequestBody BookDTO dto) {
-//        Book book = Book.builder()
-//                        .author(dto.getAuthor())
-//                        .title(dto.getTitle())
-//                        .isbn(dto.getIsbn())
-//                        .build();
-//
-//        Book savedBook = bookService.save(book);
-//
-//        return BookDTO.builder()
-//                .id(savedBook.getId())
-//                .author(savedBook.getAuthor())
-//                .title(savedBook.getTitle())
-//                .isbn(savedBook.getIsbn())
-//                .build();
-//    }
 }

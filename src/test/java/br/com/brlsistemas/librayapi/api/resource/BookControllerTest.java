@@ -134,6 +134,22 @@ public class BookControllerTest {
                 .andExpect(jsonPath("isbn").value(createNewBookDTO().getIsbn()));
     }
 
+    @Test
+    @DisplayName("Deve retornar resource not found quando o livro procurado não existir.")
+    public void bookNotFoundTest() throws Exception {
+        // cenário  (given)
+        BDDMockito.given(bookService.getById(Mockito.anyLong())).willReturn(Optional.empty());
+
+        // execução (when)
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(BOOK_API.concat("/1"))
+                .accept(MediaType.APPLICATION_JSON);
+
+        // verificação (then)
+        mvc.perform(request)
+                .andExpect( status().isNotFound() );
+    }
+
     private static BookDTO createNewBookDTO() {
         return BookDTO.builder().author("Anderson").title("As aventuras").isbn("123456").build();
     }

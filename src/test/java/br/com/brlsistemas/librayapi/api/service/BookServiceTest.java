@@ -115,6 +115,81 @@ public class BookServiceTest {
         assertThat( book.isPresent() ).isFalse();
     }
 
+    @Test
+    @DisplayName("Deve deletar um livro")
+    public void deleteTest(){
+        // cenário
+        Book book = createValidBook();
+        book.setId(1l);
+
+        // execução
+        org.junit.jupiter.api.Assertions.assertDoesNotThrow( () -> bookService.delete(book));
+
+        // verificações
+        Mockito.verify( bookRepository, Mockito.times(1) ).delete(book);
+    }
+
+    @Test
+    @DisplayName("Deve lançar erro de negócio ao tentar deletar um livro sem id")
+    public void shouldNotDeleteABookWithoutId(){
+        // cenário
+        Book book = createValidBook();
+
+        // execução
+        Throwable exception = Assertions.catchThrowable(() -> bookService.delete(book));
+
+        // verificações
+        assertThat(exception)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Book id cant be null.");
+
+        Mockito.verify( bookRepository, Mockito.never() ).delete(book);
+    }
+
+    @Test
+    @DisplayName("Deve atualizar um livro")
+    public void updateTest(){
+        // cenário
+        Book book = createValidBook();
+        book.setId(1l);
+
+        // Simula o comportamento do método save do repository com a instância book.
+        Book updatedBook = Book.builder()
+                .id(1L)
+                .isbn("11")
+                .title("Outras aventuras")
+                .author("Outro autor")
+                .build();
+
+        Mockito.when( bookRepository.save(book) ).thenReturn(updatedBook);
+
+        // execução
+        Book savedBook = bookService.update(book);
+
+        // verificação
+        assertThat(savedBook.getId()).isEqualTo(updatedBook.getId());
+        assertThat(savedBook.getAuthor()).isEqualTo(updatedBook.getAuthor());
+        assertThat(savedBook.getTitle()).isEqualTo(updatedBook.getTitle());
+        assertThat(savedBook.getIsbn()).isEqualTo(updatedBook.getIsbn());
+    }
+
+    @Test
+    @DisplayName("Deve lançar erro de negócio ao tentar atualizar um livro sem id")
+    public void shouldNotUpdateABookWithoutId(){
+        // cenário
+        Book book = createValidBook();
+
+        // execução
+        Throwable exception = Assertions.catchThrowable(() -> bookService.update(book));
+
+        // verificações
+        assertThat(exception)
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("Book id cant be null.");
+
+        Mockito.verify( bookRepository, Mockito.never() ).save(book);
+    }
+
     private static Book createValidBook() {
         return Book.builder().author("Anderson").title("As aventuras").isbn("123456").build();
     }

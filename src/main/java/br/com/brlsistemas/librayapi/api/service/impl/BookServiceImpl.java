@@ -4,6 +4,8 @@ import br.com.brlsistemas.librayapi.api.entity.Book;
 import br.com.brlsistemas.librayapi.api.repository.BookRepository;
 import br.com.brlsistemas.librayapi.api.service.BookService;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -49,6 +51,13 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Page<Book> find(Book filter, Pageable pageRequest) {
-        return null;
+        Example<Book> example = Example.of(filter,
+                ExampleMatcher
+                        .matching()
+                        .withIgnoreCase()
+                        .withIgnoreNullValues()
+                        .withStringMatcher( ExampleMatcher.StringMatcher.CONTAINING )
+        );
+        return bookRepository.findAll(example, pageRequest);
     }
 }

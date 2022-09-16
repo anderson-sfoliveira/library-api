@@ -15,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -22,6 +25,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -218,7 +222,7 @@ public class BookControllerTest {
         // cenário  (given)
         String json = new ObjectMapper().writeValueAsString( createNewBookDTO() );
 
-        BDDMockito.given(bookService.getById( Mockito.anyLong() ))
+        BDDMockito.given( bookService.getById(Mockito.anyLong()) )
                 .willReturn( Optional.empty() );
 
         // execução (when)
@@ -231,6 +235,38 @@ public class BookControllerTest {
         // verificação (then)
         mvc.perform(request)
                 .andExpect( status().isNotFound() );
+    }
+
+    @Test
+    @DisplayName("Deve filtrar livros")
+    public void findBooksTest() throws Exception {
+        // cenário
+        Long id = 1l;
+        Book book = Book.builder()
+                            .id(id)
+                            .title(createNewBookDTO().getTitle())
+                            .author(createNewBookDTO().getAuthor())
+                            .isbn(createNewBookDTO().getIsbn())
+                            .build();
+
+        BDDMockito.given( bookService.find( Mockito.any(Book.class), Mockito.any(Pageable.class) ) )
+                .willReturn( new PageImpl<Book>( Arrays.asList(book), PageRequest.of(0, 100), 1) );
+
+        String queryString = String.format("?title=%s&author=%s&page=0&size=100",
+                book.getTitle(), book.getAuthor());
+
+        // execução (when)
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .get(BOOK_API.concat(queryString))
+                .accept(MediaType.APPLICATION_JSON);
+
+        // verificação (then)
+        mvc.perform(request)
+                .andExpect( status().isOk() )
+                .andExpect(jsonPath("content", Matchers.hasSize(1)))
+                .andExpect(jsonPath("totalElements").value(1))
+                .andExpect(jsonPath("pageable.pagSize").value(100))
+                .andExpect(jsonPath("pageable.pageNumber").value(0));
     }
 
     private static BookDTO createNewBookDTO() {

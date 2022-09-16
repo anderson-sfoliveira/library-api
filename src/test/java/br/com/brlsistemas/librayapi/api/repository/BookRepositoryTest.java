@@ -32,7 +32,7 @@ public class BookRepositoryTest {
         String isbn = "123";
 
         // entityManager irá persistir o book no banco de dados h2.
-        Book book = Book.builder().author("Anderson").title("As aventuras").isbn(isbn).build();
+        Book book = createNewBook(isbn);
         entityManager.persist(book);
 
         // execução
@@ -59,10 +59,9 @@ public class BookRepositoryTest {
     @DisplayName("Deve obter um livro por id")
     public void findByIdTest(){
         // cenário
-        String isbn = "123";
+        Book book = createNewBook("123");
 
         // entityManager irá persistir o book no banco de dados h2.
-        Book book = Book.builder().author("Anderson").title("As aventuras").isbn(isbn).build();
         entityManager.persist(book);
 
         // execução
@@ -70,5 +69,39 @@ public class BookRepositoryTest {
 
         // verificação
         assertThat(foundBook.isPresent()).isTrue();
+    }
+
+    @Test
+    @DisplayName("Deve salvar um livro")
+    public void saveTest(){
+        // cenário
+        Book book = createNewBook("123");
+
+        // execução
+        Book savedBook = bookRepository.save(book);
+
+        // verificação
+        assertThat( savedBook.getId() ).isNotNull();
+    }
+
+    @Test
+    @DisplayName("Deve deletar um livro")
+    public void deleteTest(){
+        // cenário
+        Book book = createNewBook("123");
+        entityManager.persist(book);
+
+        Book foundBook = entityManager.find(Book.class, book.getId());
+
+        // execução
+        bookRepository.delete(foundBook);
+
+        // verificação
+        Book deleteBook = entityManager.find(Book.class, book.getId());
+        assertThat(deleteBook).isNull();
+    }
+
+    private static Book createNewBook(String isbn) {
+        return Book.builder().author("Anderson").title("As aventuras").isbn(isbn).build();
     }
 }

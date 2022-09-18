@@ -5,6 +5,7 @@ import br.com.brlsistemas.librayapi.api.entity.Book;
 import br.com.brlsistemas.librayapi.api.entity.Loan;
 import br.com.brlsistemas.librayapi.api.service.BookService;
 import br.com.brlsistemas.librayapi.api.service.LoanService;
+import br.com.brlsistemas.librayapi.exception.BusinessException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
@@ -86,6 +87,37 @@ public class LoanControllerTest {
     @Test
     @DisplayName("Deve retornar erro ao tentar fazer empréstimo de livro inexistente.")
     public void invalidIsbnCreateLoanTest() throws Exception {
+        // cenário
+        LoanDTO loanDTO = LoanDTO.builder().isbn("123").customer("Fulano").build();
+        String json = new ObjectMapper().writeValueAsString(loanDTO);
+
+        Book foundBook = Book.builder()
+                .id(1l)
+                .isbn("123")
+                .build();
+
+        BDDMockito.given( bookService.getBookByIsbn("123") ).willReturn( Optional.of(foundBook) );
+
+//        Loan loan = Loan.builder().id(1l).customer("Anderson").book(foundBook).loanDate(LocalDate.now()).build();
+        BDDMockito.given( loanService.save(Mockito.any(Loan.class)) ).willThrow(new BusinessException("Book already loaned"));
+
+        // execução
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .post(LOAN_API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        // verificação
+        mockMvc.perform( request )
+                .andExpect( status().isBadRequest() )
+                .andExpect( jsonPath("errors", Matchers.hasSize(1)) )
+                .andExpect( jsonPath("errors[0]").value("Book already loaned") );
+    }
+
+    @Test
+    @DisplayName("Deve retornar erro ao tentar fazer empréstimo de um livro emprestado.")
+    public void loanedBookErrorOnCreateLoanTest() throws Exception {
         // cenário
         LoanDTO loanDTO = LoanDTO.builder().isbn("123").customer("Fulano").build();
         String json = new ObjectMapper().writeValueAsString(loanDTO);

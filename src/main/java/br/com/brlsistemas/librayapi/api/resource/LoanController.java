@@ -26,7 +26,7 @@ public class LoanController {
     @ResponseStatus(HttpStatus.CREATED)
     public Long createLoan(@RequestBody LoanDTO loanDTO){
         Book book = bookService.getBookByIsbn(loanDTO.getIsbn())
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, new ApiErrors("Book not found for passed Isbn")));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Book not found for passed Isbn"));
 
         Loan loan = Loan.builder()
                 .customer(loanDTO.getCustomer())

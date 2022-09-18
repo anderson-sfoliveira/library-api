@@ -26,8 +26,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import java.time.LocalDate;
 import java.util.Optional;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(SpringExtension.class)
 @ActiveProfiles("test")
@@ -46,6 +45,13 @@ public class LoanControllerTest {
     @MockBean
     private LoanService loanService;
 
+    // o fulano vai pedir emprestado livro com isbn 123
+    // encontrar livro através do isbn
+    //  bookRepository.findByIsbn -> retorna um Optional<Book>
+    // tabela com customer, livro, data e status
+    //  loanRepository.save(loan)
+    // *** o save sempre retorna o objeto salvo.
+    // *** o get/find sempre retorna um Optional.
     @Test
     @DisplayName("Deve realizar um empréstimo")
     public void createLoanTest() throws Exception {
@@ -55,8 +61,6 @@ public class LoanControllerTest {
 
         Book foundBook = Book.builder()
                 .id(1l)
-//                .title("As aventuras") informações não necessárias nesse cenário
-//                .author("Fulano")
                 .isbn("123")
                 .build();
 
@@ -65,25 +69,16 @@ public class LoanControllerTest {
         Loan loan = Loan.builder().id(1l).customer("Anderson").book(foundBook).loanDate(LocalDate.now()).build();
         BDDMockito.given( loanService.save(Mockito.any(Loan.class)) ).willReturn( loan );
 
+        // execução
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
                 .post(LOAN_API)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json);
 
+        // verificação
         mockMvc.perform( request )
                 .andExpect( status().isCreated() )
-                .andExpect( jsonPath("id").value(1l) )
-                ;
-
-
-        // o fulano vai pedir emprestado livro com isbn 123
-        // encontrar livro através do isbn
-            //  bookRepository.findByIsbn -> retorna um Optional<Book>
-        // tabela com customer, livro, data e status
-            //  loanRepository.save(loan)
-
-        // *** o save sempre retorna o objeto salvo.
-        // *** o get/find sempre retorna um Optional.
+                .andExpect( content().string("1") );
     }
 }

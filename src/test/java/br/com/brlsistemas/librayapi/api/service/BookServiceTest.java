@@ -219,6 +219,29 @@ public class BookServiceTest {
         assertThat(result.getPageable().getPageSize()).isEqualTo(10);
     }
 
+    @Test
+    @DisplayName("Deve obter um livro pelo isbn")
+    public void getBookByIsbnTest() {
+        // cenário
+        String isbn = "123456";
+        Book book = createValidBook();
+        book.setId(1l);
+
+        Mockito.when( bookRepository.findByIsbn(isbn) ).thenReturn( Optional.of(book) );
+
+        // execução
+        Optional<Book> foundBook = bookService.getBookByIsbn(isbn);
+
+        // verificações
+        assertThat( foundBook.isPresent() ).isTrue();
+        assertThat( foundBook.get().getId() ).isEqualTo(book.getId());
+        assertThat( foundBook.get().getAuthor() ).isEqualTo(book.getAuthor());
+        assertThat( foundBook.get().getTitle() ).isEqualTo(book.getTitle());
+        assertThat( foundBook.get().getIsbn() ).isEqualTo(book.getIsbn());
+
+        Mockito.verify( bookRepository, Mockito.times(1) ).findByIsbn(isbn);
+    }
+
     private static Book createValidBook() {
         return Book.builder().author("Anderson").title("As aventuras").isbn("123456").build();
     }

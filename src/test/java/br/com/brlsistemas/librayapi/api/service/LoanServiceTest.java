@@ -131,7 +131,7 @@ public class LoanServiceTest {
         Mockito.verify(loanRepository).save(loan);
     }
 
-    private static Loan createLoan() {
+    public static Loan createLoan() {
         Book book = Book.builder().id(1l).build();
 
         return Loan.builder()

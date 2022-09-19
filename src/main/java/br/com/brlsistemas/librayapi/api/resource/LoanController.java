@@ -10,6 +10,7 @@ import br.com.brlsistemas.librayapi.api.exception.ApiErrors;
 import br.com.brlsistemas.librayapi.api.service.BookService;
 import br.com.brlsistemas.librayapi.api.service.LoanService;
 import lombok.AllArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -29,6 +29,7 @@ public class LoanController {
 
     private BookService bookService;
     private LoanService loanService;
+    private ModelMapper modelMapper;
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -54,18 +55,21 @@ public class LoanController {
     }
 
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    public Page<LoanDTO> find( LoanFilterDTO loanFilterDTO, Pageable pageable ) {
-        Page<Loan> result = loanService.find( loanFilterDTO, pageable );
-        return null;
-//        Book filter = modelMapper.map(bookDTO, Book.class);
-//        Page<Book> result = bookService.find(filter, pageRequest);
-//
-//        List<BookDTO> list = result.getContent()
-//                .stream()
-//                .map(entity -> modelMapper.map(entity, BookDTO.class))
-//                .collect(Collectors.toList());
-//
-//        return new PageImpl<BookDTO>( list, pageRequest, result.getTotalElements() );
+    public Page<LoanDTO> find(LoanFilterDTO loanFilterDTO, Pageable pageable) {
+        Page<Loan> result = loanService.find(loanFilterDTO, pageable);
+        List<LoanDTO> loans = result
+                .getContent()
+                .stream()
+                .map(entity -> {
+
+                    Book book = entity.getBook();
+                    BookDTO bookDTO = modelMapper.map(book, BookDTO.class);
+                    LoanDTO loanDTO = modelMapper.map(entity, LoanDTO.class);
+                    loanDTO.setBook(bookDTO);
+                    return loanDTO;
+
+                }).collect(Collectors.toList());
+
+        return new PageImpl<LoanDTO>(loans, pageable, result.getTotalElements());
     }
 }

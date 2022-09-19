@@ -1,6 +1,7 @@
 package br.com.brlsistemas.librayapi.api.resource;
 
 import br.com.brlsistemas.librayapi.api.dto.LoanDTO;
+import br.com.brlsistemas.librayapi.api.dto.ReturnedLoanDTO;
 import br.com.brlsistemas.librayapi.api.entity.Book;
 import br.com.brlsistemas.librayapi.api.entity.Loan;
 import br.com.brlsistemas.librayapi.api.service.BookService;
@@ -135,5 +136,29 @@ public class LoanControllerTest {
                 .andExpect( status().isBadRequest() )
                 .andExpect( jsonPath("errors", Matchers.hasSize(1)) )
                 .andExpect( jsonPath("errors[0]").value("Book not found for passed Isbn") );
+    }
+
+    @Test
+    @DisplayName("Deve retornar um livro.")
+    public void returnBookTest() throws Exception {
+        // cenário
+        ReturnedLoanDTO returnedLoanDTO = ReturnedLoanDTO.builder().returned(true).build();
+        String json = new ObjectMapper().writeValueAsString(returnedLoanDTO);
+
+        Loan loan = Loan.builder().id(1l).build();
+        BDDMockito.given( loanService.getById(Mockito.anyLong()) ).willReturn( Optional.of(loan) );
+
+        // execução
+        MockHttpServletRequestBuilder request = MockMvcRequestBuilders
+                .patch(LOAN_API.concat("/1"))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json);
+
+        // verificação
+        mockMvc.perform( request )
+                .andExpect( status().isOk() );
+
+        Mockito.verify(loanService, Mockito.times(1)).update(loan);
     }
 }

@@ -1,6 +1,7 @@
 package br.com.brlsistemas.librayapi.api.resource;
 
 import br.com.brlsistemas.librayapi.api.dto.LoanDTO;
+import br.com.brlsistemas.librayapi.api.dto.ReturnedLoanDTO;
 import br.com.brlsistemas.librayapi.api.entity.Book;
 import br.com.brlsistemas.librayapi.api.entity.Loan;
 import br.com.brlsistemas.librayapi.api.exception.ApiErrors;
@@ -36,5 +37,12 @@ public class LoanController {
 
         Loan savedLoan = loanService.save(loan);
         return savedLoan.getId();
+    }
+
+    @PatchMapping("{id}")
+    public void returnBook( @PathVariable Long id, @RequestBody ReturnedLoanDTO returnedLoanDTO ) {
+        Loan loan = loanService.getById(id).get();
+        loan.setReturned(returnedLoanDTO.getReturned());
+        loanService.update(loan);
     }
 }

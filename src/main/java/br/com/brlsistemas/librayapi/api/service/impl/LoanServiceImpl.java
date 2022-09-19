@@ -5,6 +5,8 @@ import br.com.brlsistemas.librayapi.api.repository.LoanRepository;
 import br.com.brlsistemas.librayapi.api.service.LoanService;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
 
+import java.util.Optional;
+
 public class LoanServiceImpl implements LoanService {
     private LoanRepository loanRepository;
 
@@ -18,5 +20,15 @@ public class LoanServiceImpl implements LoanService {
             throw new BusinessException("Book already loaned");
         }
         return loanRepository.save(loan);
+    }
+
+    @Override
+    public Optional<Loan> getById(Long id) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void update(Loan loan) {
+
     }
 }

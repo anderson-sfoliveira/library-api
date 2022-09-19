@@ -94,15 +94,9 @@ public class LoanServiceTest {
     @DisplayName("Deve obter as informações de um empréstimo pelo ID")
     public void getLoanDetailsTest() {
         // cenário
-        Book book = Book.builder().id(1l).build();
-
+        Loan loan = createLoan();
         Long id = 1l;
-        Loan loan = Loan.builder()
-                .id(id)
-                .customer("Fulano")
-                .book(book)
-                .loanDate(LocalDate.now())
-                .build();
+        loan.setId(id);
 
         Mockito.when(loanRepository.findById(id)).thenReturn(Optional.of(loan));
 
@@ -117,5 +111,34 @@ public class LoanServiceTest {
         assertThat(foundLoan.get().getLoanDate()).isEqualTo(loan.getLoanDate());
 
         Mockito.verify(loanRepository).findById(id);
+    }
+
+    @Test
+    @DisplayName("Deve atualizar um empréstimo.")
+    public void updateLoanTest(){
+        // cenário
+        Loan loan = createLoan();
+        Long id = 1l;
+        loan.setId(id);
+
+        Mockito.when(loanRepository.save(loan)).thenReturn( loan );
+
+        // execução
+        Loan returnedLoan = loanService.update(loan);
+
+        // verificação
+        assertThat(returnedLoan.getReturned()).isTrue();
+        Mockito.verify(loanRepository).save(loan);
+    }
+
+    private static Loan createLoan() {
+        Book book = Book.builder().id(1l).build();
+
+        return Loan.builder()
+                .customer("Fulano")
+                .book(book)
+                .loanDate(LocalDate.now())
+                .returned(true)
+                .build();
     }
 }

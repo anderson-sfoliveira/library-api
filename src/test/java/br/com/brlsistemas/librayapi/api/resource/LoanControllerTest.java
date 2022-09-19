@@ -98,7 +98,6 @@ public class LoanControllerTest {
 
         BDDMockito.given( bookService.getBookByIsbn("123") ).willReturn( Optional.of(foundBook) );
 
-//        Loan loan = Loan.builder().id(1l).customer("Anderson").book(foundBook).loanDate(LocalDate.now()).build();
         BDDMockito.given( loanService.save(Mockito.any(Loan.class)) ).willThrow(new BusinessException("Book already loaned"));
 
         // execução

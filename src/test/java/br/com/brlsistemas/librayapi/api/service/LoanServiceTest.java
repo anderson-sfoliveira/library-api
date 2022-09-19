@@ -2,11 +2,9 @@ package br.com.brlsistemas.librayapi.api.service;
 
 import br.com.brlsistemas.librayapi.api.entity.Book;
 import br.com.brlsistemas.librayapi.api.entity.Loan;
-import br.com.brlsistemas.librayapi.api.repository.RepositoryLoan;
-import br.com.brlsistemas.librayapi.api.service.impl.BookServiceImpl;
+import br.com.brlsistemas.librayapi.api.repository.LoanRepository;
 import br.com.brlsistemas.librayapi.api.service.impl.LoanServiceImpl;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
-import lombok.AllArgsConstructor;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -28,11 +26,11 @@ public class LoanServiceTest {
     private LoanService loanService;
 
     @MockBean
-    private RepositoryLoan repositoryLoan;
+    private LoanRepository loanRepository;
 
     @BeforeEach
     public void setUp(){
-        this.loanService = new LoanServiceImpl(repositoryLoan);
+        this.loanService = new LoanServiceImpl(loanRepository);
     }
 
     @Test
@@ -53,9 +51,9 @@ public class LoanServiceTest {
                 .loanDate(LocalDate.now())
                 .build();
 
-        Mockito.when( repositoryLoan.existsByBookAndNotReturned(book) ).thenReturn( false );
+        Mockito.when( loanRepository.existsByBookAndNotReturned(book) ).thenReturn( false );
 
-        Mockito.when(repositoryLoan.save(loan)).thenReturn( savedLoan );
+        Mockito.when(loanRepository.save(loan)).thenReturn( savedLoan );
 
         // execução
         Loan returnedLoan = loanService.save(loan);
@@ -78,7 +76,7 @@ public class LoanServiceTest {
                 .book(book)
                 .build();
 
-        Mockito.when( repositoryLoan.existsByBookAndNotReturned(book) ).thenReturn( true );
+        Mockito.when( loanRepository.existsByBookAndNotReturned(book) ).thenReturn( true );
 
         // execução
         Throwable exception = Assertions.catchThrowable(() -> loanService.save(loan));
@@ -88,6 +86,6 @@ public class LoanServiceTest {
                 .isInstanceOf(BusinessException.class)
                 .hasMessage("Book already loaned");
 
-        Mockito.verify( repositoryLoan, Mockito.never() ).save(loan);
+        Mockito.verify(loanRepository, Mockito.never() ).save(loan);
     }
 }

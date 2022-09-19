@@ -5,7 +5,9 @@ import br.com.brlsistemas.librayapi.api.entity.Loan;
 import br.com.brlsistemas.librayapi.api.repository.RepositoryLoan;
 import br.com.brlsistemas.librayapi.api.service.impl.BookServiceImpl;
 import br.com.brlsistemas.librayapi.api.service.impl.LoanServiceImpl;
+import br.com.brlsistemas.librayapi.exception.BusinessException;
 import lombok.AllArgsConstructor;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -51,6 +53,8 @@ public class LoanServiceTest {
                 .loanDate(LocalDate.now())
                 .build();
 
+        Mockito.when( repositoryLoan.existsByBookAndNotReturned(book) ).thenReturn( false );
+
         Mockito.when(repositoryLoan.save(loan)).thenReturn( savedLoan );
 
         // execução
@@ -61,5 +65,29 @@ public class LoanServiceTest {
         assertThat(savedLoan.getBook().getId()).isEqualTo(returnedLoan.getBook().getId());
         assertThat(savedLoan.getCustomer()).isEqualTo(returnedLoan.getCustomer());
         assertThat(savedLoan.getLoanDate()).isEqualTo(returnedLoan.getLoanDate());
+    }
+
+    @Test
+    @DisplayName("Deve lançar erro de negócio ao salvar um empréstimo com livro já emprestado.")
+    public void loanedSaveLoanTest(){
+        Book book = Book.builder().id(1l).build();
+        String customer = "Fulano";
+
+        Loan loan = Loan.builder()
+                .customer(customer)
+                .book(book)
+                .build();
+
+        Mockito.when( repositoryLoan.existsByBookAndNotReturned(book) ).thenReturn( true );
+
+        // execução
+        Throwable exception = Assertions.catchThrowable(() -> loanService.save(loan));
+
+        // verificações
+        assertThat(exception)
+                .isInstanceOf(BusinessException.class)
+                .hasMessage("Book already loaned");
+
+        Mockito.verify( repositoryLoan, Mockito.never() ).save(loan);
     }
 }

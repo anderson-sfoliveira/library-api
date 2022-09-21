@@ -1,7 +1,8 @@
-package br.com.brlsistemas.librayapi.api.service;
+package br.com.brlsistemas.librayapi.service;
 
 import br.com.brlsistemas.librayapi.api.entity.Book;
 import br.com.brlsistemas.librayapi.api.repository.BookRepository;
+import br.com.brlsistemas.librayapi.api.service.BookService;
 import br.com.brlsistemas.librayapi.api.service.impl.BookServiceImpl;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
 import org.assertj.core.api.Assertions;

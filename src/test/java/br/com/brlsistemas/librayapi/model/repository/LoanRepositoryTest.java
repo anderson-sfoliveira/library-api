@@ -1,7 +1,8 @@
-package br.com.brlsistemas.librayapi.api.repository;
+package br.com.brlsistemas.librayapi.model.repository;
 
 import br.com.brlsistemas.librayapi.api.entity.Book;
 import br.com.brlsistemas.librayapi.api.entity.Loan;
+import br.com.brlsistemas.librayapi.api.repository.LoanRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDate;
 
-import static br.com.brlsistemas.librayapi.api.repository.BookRepositoryTest.createNewBook;
+import static br.com.brlsistemas.librayapi.model.repository.BookRepositoryTest.createNewBook;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)

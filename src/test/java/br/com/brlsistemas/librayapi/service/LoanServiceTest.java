@@ -1,9 +1,10 @@
-package br.com.brlsistemas.librayapi.api.service;
+package br.com.brlsistemas.librayapi.service;
 
 import br.com.brlsistemas.librayapi.api.dto.LoanFilterDTO;
 import br.com.brlsistemas.librayapi.api.entity.Book;
 import br.com.brlsistemas.librayapi.api.entity.Loan;
 import br.com.brlsistemas.librayapi.api.repository.LoanRepository;
+import br.com.brlsistemas.librayapi.api.service.LoanService;
 import br.com.brlsistemas.librayapi.api.service.impl.LoanServiceImpl;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
 import org.assertj.core.api.Assertions;

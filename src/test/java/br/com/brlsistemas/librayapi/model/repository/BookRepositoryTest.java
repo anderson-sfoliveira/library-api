@@ -1,7 +1,6 @@
 package br.com.brlsistemas.librayapi.model.repository;
 
-import br.com.brlsistemas.librayapi.api.entity.Book;
-import br.com.brlsistemas.librayapi.api.repository.BookRepository;
+import br.com.brlsistemas.librayapi.model.entity.Book;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

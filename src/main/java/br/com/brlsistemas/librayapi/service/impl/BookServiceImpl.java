@@ -1,8 +1,8 @@
-package br.com.brlsistemas.librayapi.api.service.impl;
+package br.com.brlsistemas.librayapi.service.impl;
 
-import br.com.brlsistemas.librayapi.api.entity.Book;
-import br.com.brlsistemas.librayapi.api.repository.BookRepository;
-import br.com.brlsistemas.librayapi.api.service.BookService;
+import br.com.brlsistemas.librayapi.model.entity.Book;
+import br.com.brlsistemas.librayapi.model.repository.BookRepository;
+import br.com.brlsistemas.librayapi.service.BookService;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;

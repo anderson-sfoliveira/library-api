@@ -1,6 +1,6 @@
-package br.com.brlsistemas.librayapi.api.repository;
+package br.com.brlsistemas.librayapi.model.repository;
 
-import br.com.brlsistemas.librayapi.api.entity.Book;
+import br.com.brlsistemas.librayapi.model.entity.Book;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

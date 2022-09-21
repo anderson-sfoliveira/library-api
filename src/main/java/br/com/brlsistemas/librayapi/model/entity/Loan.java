@@ -1,4 +1,4 @@
-package br.com.brlsistemas.librayapi.api.entity;
+package br.com.brlsistemas.librayapi.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

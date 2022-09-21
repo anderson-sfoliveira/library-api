@@ -1,11 +1,10 @@
-package br.com.brlsistemas.librayapi.api.service;
+package br.com.brlsistemas.librayapi.service;
 
 import br.com.brlsistemas.librayapi.api.dto.LoanFilterDTO;
-import br.com.brlsistemas.librayapi.api.entity.Loan;
+import br.com.brlsistemas.librayapi.model.entity.Loan;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface LoanService {

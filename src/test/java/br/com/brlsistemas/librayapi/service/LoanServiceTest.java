@@ -1,11 +1,10 @@
 package br.com.brlsistemas.librayapi.service;
 
 import br.com.brlsistemas.librayapi.api.dto.LoanFilterDTO;
-import br.com.brlsistemas.librayapi.api.entity.Book;
-import br.com.brlsistemas.librayapi.api.entity.Loan;
-import br.com.brlsistemas.librayapi.api.repository.LoanRepository;
-import br.com.brlsistemas.librayapi.api.service.LoanService;
-import br.com.brlsistemas.librayapi.api.service.impl.LoanServiceImpl;
+import br.com.brlsistemas.librayapi.model.entity.Book;
+import br.com.brlsistemas.librayapi.model.entity.Loan;
+import br.com.brlsistemas.librayapi.model.repository.LoanRepository;
+import br.com.brlsistemas.librayapi.service.impl.LoanServiceImpl;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;

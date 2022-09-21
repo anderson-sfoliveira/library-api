@@ -1,6 +1,6 @@
-package br.com.brlsistemas.librayapi.api.service;
+package br.com.brlsistemas.librayapi.service;
 
-import br.com.brlsistemas.librayapi.api.entity.Book;
+import br.com.brlsistemas.librayapi.model.entity.Book;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 

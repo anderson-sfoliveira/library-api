@@ -1,9 +1,8 @@
 package br.com.brlsistemas.librayapi.service;
 
-import br.com.brlsistemas.librayapi.api.entity.Book;
-import br.com.brlsistemas.librayapi.api.repository.BookRepository;
-import br.com.brlsistemas.librayapi.api.service.BookService;
-import br.com.brlsistemas.librayapi.api.service.impl.BookServiceImpl;
+import br.com.brlsistemas.librayapi.model.entity.Book;
+import br.com.brlsistemas.librayapi.model.repository.BookRepository;
+import br.com.brlsistemas.librayapi.service.impl.BookServiceImpl;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +10,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;

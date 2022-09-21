@@ -1,9 +1,9 @@
-package br.com.brlsistemas.librayapi.api.service.impl;
+package br.com.brlsistemas.librayapi.service.impl;
 
 import br.com.brlsistemas.librayapi.api.dto.LoanFilterDTO;
-import br.com.brlsistemas.librayapi.api.entity.Loan;
-import br.com.brlsistemas.librayapi.api.repository.LoanRepository;
-import br.com.brlsistemas.librayapi.api.service.LoanService;
+import br.com.brlsistemas.librayapi.model.entity.Loan;
+import br.com.brlsistemas.librayapi.model.repository.LoanRepository;
+import br.com.brlsistemas.librayapi.service.LoanService;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

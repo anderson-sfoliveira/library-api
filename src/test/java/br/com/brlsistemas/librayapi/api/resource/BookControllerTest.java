@@ -1,10 +1,9 @@
 package br.com.brlsistemas.librayapi.api.resource;
 
 import br.com.brlsistemas.librayapi.api.dto.BookDTO;
-import br.com.brlsistemas.librayapi.api.entity.Book;
-import br.com.brlsistemas.librayapi.api.resource.BookController;
+import br.com.brlsistemas.librayapi.model.entity.Book;
 import br.com.brlsistemas.librayapi.exception.BusinessException;
-import br.com.brlsistemas.librayapi.api.service.BookService;
+import br.com.brlsistemas.librayapi.service.BookService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.DisplayName;

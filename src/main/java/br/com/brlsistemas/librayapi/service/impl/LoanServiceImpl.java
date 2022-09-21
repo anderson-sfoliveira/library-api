@@ -1,6 +1,7 @@
 package br.com.brlsistemas.librayapi.service.impl;
 
 import br.com.brlsistemas.librayapi.api.dto.LoanFilterDTO;
+import br.com.brlsistemas.librayapi.model.entity.Book;
 import br.com.brlsistemas.librayapi.model.entity.Loan;
 import br.com.brlsistemas.librayapi.model.repository.LoanRepository;
 import br.com.brlsistemas.librayapi.service.LoanService;
@@ -38,5 +39,10 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public Page<Loan> find(LoanFilterDTO loanFilterDTO, Pageable pageable) {
         return loanRepository.findByBookIsbnOrCustomer(loanFilterDTO.getIsbn(), loanFilterDTO.getCustomer(), pageable);
+    }
+
+    @Override
+    public Page<Loan> getLoansByBook(Book book, Pageable pageable) {
+        return loanRepository.findByBook(book, pageable);
     }
 }

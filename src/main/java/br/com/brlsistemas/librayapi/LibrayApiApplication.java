@@ -16,9 +16,10 @@ public class LibrayApiApplication {
 		return new ModelMapper();
 	}
 
-	@Scheduled(cron = "0 0 5 * * *") // agendado para todo dia 5 da manhã
+//	@Scheduled(cron = "0 33 19 1/1 * ? *") // http://www.cronmaker.com/
+	@Scheduled(cron = "0 41 19 * * *")
 	public void testeAgendamentoTarefas(){
-
+		System.out.println("Agendamento de tarefas.");
 	}
 
 	public static void main(String[] args) {

@@ -2,7 +2,7 @@ package br.com.brlsistemas.librayapi.service.impl;
 
 import br.com.brlsistemas.librayapi.service.EmailService;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;

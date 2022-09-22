@@ -5,7 +5,7 @@ import br.com.brlsistemas.librayapi.service.EmailService;
 import br.com.brlsistemas.librayapi.service.LoanService;
 import br.com.brlsistemas.librayapi.service.ScheduleService;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 

@@ -2,6 +2,11 @@ package br.com.brlsistemas.librayapi;
 
 import br.com.brlsistemas.librayapi.model.entity.Loan;
 import br.com.brlsistemas.librayapi.service.EmailService;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.servers.Server;
+import io.swagger.v3.oas.annotations.servers.ServerVariable;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -17,6 +22,20 @@ import java.util.stream.Collectors;
 
 @SpringBootApplication
 @EnableScheduling
+@OpenAPIDefinition(
+		info = @Info(
+				title = "Library API",
+				description = "API do projeto de bibliotecas",
+				version = "1.0",
+				contact = @Contact(name = "Anderson Oliveira", url = "https://github.com/anderson-sfoliveira", email = "anderson.sfoliveira@gmail.com")
+		),
+		servers = @Server(
+				url = "host/api/issue/v1",
+				description = "Descrição do Server",
+				variables = {
+						@ServerVariable(name = "serverUrl", defaultValue = "localhost"),
+						@ServerVariable(name = "serverHttpPort", defaultValue = "8080")
+				}))
 public class LibrayApiApplication {
 
 //	@Autowired

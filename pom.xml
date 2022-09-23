@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>br.com.brlsistemas</groupId>
-	<artifactId>libray-api</artifactId>
+	<artifactId>library-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>libray-api</name>
+	<name>library-api</name>
 	<description>API do projeto de bibliotecas</description>
 	<properties>
 		<java.version>11</java.version>

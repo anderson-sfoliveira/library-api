@@ -3,7 +3,10 @@ jdk:
   - openjdk11
 before_install:
   - chmod +x mvnw
-
+install:
+  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+script:
+  - mvn test
 
 #dist: trusty
 #before_install:

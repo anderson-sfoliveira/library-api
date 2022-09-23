@@ -1,3 +1,4 @@
+language: java
 jdk: openjdk11
 script:
   - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh

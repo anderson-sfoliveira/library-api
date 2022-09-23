@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 				contact = @Contact(name = "Anderson Oliveira", url = "https://github.com/anderson-sfoliveira", email = "anderson.sfoliveira@gmail.com")
 		),
 		servers = @Server(
-				url = "host/api/issue/v1",
+				url = "http://localhost:8080/",
 				description = "Descrição do Server",
 				variables = {
 						@ServerVariable(name = "serverUrl", defaultValue = "localhost"),

@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api/books")
 @RequiredArgsConstructor
+@Slf4j // log
 //@Api("Book API")
 public class BookController {
 
@@ -43,6 +45,7 @@ public class BookController {
 //            }
     )
     public BookDTO create(@RequestBody @Valid BookDTO dto) {
+        log.info("Create a book for isbn: {}", dto.getIsbn());
         Book book = modelMapper.map(dto, Book.class);
         Book savedBook = bookService.save(book);
         return modelMapper.map(savedBook, BookDTO.class);
@@ -51,6 +54,7 @@ public class BookController {
     @GetMapping("{id}")
 //    @ApiOperation("Obtains a book details by id")
     public BookDTO get(@PathVariable Long id) {
+        log.info("Obtaining details for book id: {}", id);
         return bookService
                 .getById(id)
                 .map( book -> modelMapper.map(book, BookDTO.class) )
@@ -64,6 +68,7 @@ public class BookController {
 //            @ApiResponse(code = 204, message = "Book successfully deleted")
 //    })
     public void delete(@PathVariable Long id) {
+        log.info("Deleting book of id: {}", id);
         Book book = bookService.getById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
         bookService.delete(book);
     }
@@ -71,6 +76,7 @@ public class BookController {
     @PutMapping("{id}")
 //    @ApiOperation("Updates a book")
     public BookDTO update(@PathVariable Long id, BookDTO bookDTO) {
+        log.info("updating book of id: {}", id);
         return bookService.getById(id).map( book -> {
             book.setAuthor(bookDTO.getAuthor());
             book.setTitle(bookDTO.getTitle());

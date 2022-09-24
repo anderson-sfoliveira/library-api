@@ -4,5 +4,4 @@ jdk:
 before_install:
   - chmod +x mvnw
 after_success:
-  - chmod +x codecov
-  - bash <(curl -s https://codecov.io/bash)
+  - bash <(curl -s https://codecov.io/bash) -f coverage/target/site/jacoco/jacoco.xml

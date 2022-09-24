@@ -1,11 +1,8 @@
 language: java
 jdk:
-  - openjdk11
+  - openjdk8
 before_install:
   - chmod +x mvnw
-# skip the Travis-CI install phase because Maven handles that directly
-install:
-  - 'true'
 after_success:
   - bash <(curl -s https://codecov.io/bash)
     #-f coverage/target/site/jacoco/jacoco.xml

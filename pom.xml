@@ -126,6 +126,16 @@ Failed to execute goal org.apache.maven.plugins:maven-resources-plugin:3.2.0:res
 					</execution>
 				</executions>
 			</plugin>
+			<!-- Maven Compiler -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.5.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 

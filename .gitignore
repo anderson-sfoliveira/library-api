@@ -5,7 +5,7 @@ target/
 !**/src/test/**/target/
 
 ### MANUAL ###
-appfile.log
+appfile.log*
 
 ### STS ###
 .apt_generated

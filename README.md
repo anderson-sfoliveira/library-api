@@ -29,7 +29,9 @@ Desenvolvido durante o curso **Design de API's RestFul com Spring Boot, TDD e o 
 Esta API realiza o controle de uma biblioteca.
 
 O projeto foi desenvolvido utilizando as técnicas TDD e BDD onde os testes são escritos antes mesmo dos códigos.
-Os testes foram escritos utilizando Junit5, Mockito e Assertj, que fazem parte do Spring Boot Starter Test.
+Os testes foram escritos utilizando as bibliotecas Junit5, Mockito e Assertj, que fazem parte do Spring Boot Starter Test.
+
+Usamos o H2 como nosso banco de dados em memória, o lombok para reduzir código boilerplate e modelmapper para conversão de DTOs.
 
 Criamos um agendamento (scheduling) para envio de e-mail com Spring Boot Starter Mail para livros emprestados a mais de 3 dias.
 Utilizamos o Mailtrap para simular e-mails.
@@ -39,16 +41,14 @@ Utilizamos o Spring Boot Starter Actuator para monitorar as informações e stat
 A biblioteca Spring Boot Admin foi utilizada para fazer a integração com a aplicação [admin-apps](https://github.com/anderson-sfoliveira/admin-apps) que criamos para fornecer uma interface administrativa para monitorar aplicativos Spring Boot.
 Neste outro aplicativo são demonstradas as informações coletadas pelo Spring Boot Starter Actuator.
 
-Usamos o H2 como nosso banco de dados em memória, o lombok para reduzir código boilerplate e modelmapper para conversão de DTOs.
-
 O Jacoco foi a ferramenta escolhida para realizar a cobertura de código, usada para medir quantas linhas do nosso código são testadas.
 
 A integração contínua ficou por conta do Travis CI onde é testado o build e os testes da nossa aplicação.
 Os resultados dos testes são enviados para o Codecov, onde podemos visualizamos a análise da cobertura de código.
 
-O Springdoc - OpenAPI 3 (version 1.6.11) foi utilizado para gerar automaticamente a documentação da API junto com algumas anotações Swagger.
+O Springdoc - OpenAPI 3 foi utilizado para gerar automaticamente a documentação da API junto com algumas anotações Swagger.
 
-Projeto está hospedado no Heroku e podemos usar o Insomnia para testar nossos endpoints.
+Projeto está hospedado no Heroku e podemos usar o Insomnia para testar os nossos endpoints.
 
 ---
 

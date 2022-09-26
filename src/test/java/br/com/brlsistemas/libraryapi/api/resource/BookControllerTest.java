@@ -52,10 +52,12 @@ public class BookControllerTest {
     @Test
     @DisplayName("Deve criar um livro com sucesso")
     public void createBookTest() throws Exception {
+        // cenário  (given)
         // Simula o comportamento do método save do service com a instância book.
         Book savedBook = Book.builder().id(10L).author("Anderson").title("As aventuras").isbn("123456").build();
         BDDMockito.given(bookService.save(Mockito.any(Book.class))).willReturn(savedBook);
 
+        // execução (when)
         BookDTO dto = createNewBookDTO();
         String json = new ObjectMapper().writeValueAsString(dto);
 
@@ -65,6 +67,7 @@ public class BookControllerTest {
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json);
 
+        // verificação (then)
         mvc.perform(request)
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("id").isNotEmpty())
@@ -117,7 +120,7 @@ public class BookControllerTest {
     @DisplayName("Deve obter informações de um livro")
     public void getBookDetailsTest() throws Exception {
         // cenário  (given)
-        Long id = 1l;
+        Long id = 1L;
 
         Book book = Book.builder()
                         .id(id)
@@ -162,7 +165,7 @@ public class BookControllerTest {
     @DisplayName("Deve deletar um livro")
     public void deleteBookTest() throws Exception {
         // cenário  (given)
-        BDDMockito.given(bookService.getById(Mockito.anyLong())).willReturn(Optional.of(Book.builder().id(1l).build()));
+        BDDMockito.given(bookService.getById(Mockito.anyLong())).willReturn(Optional.of(Book.builder().id(1L).build()));
 
         // execução (when)
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders
@@ -192,15 +195,15 @@ public class BookControllerTest {
     @DisplayName("Deve atualizar um livro")
     public void updateBookTest() throws Exception {
         // cenário  (given)
-        Long id = 1l;
+        Long id = 1L;
 
         String json = new ObjectMapper().writeValueAsString( createNewBookDTO() );
 
-        Book updatingBook = Book.builder().id(1l).title("Titulo 1").author("Ander").isbn("123").build();
+        Book updatingBook = Book.builder().id(1L).title("Titulo 1").author("Ander").isbn("123").build();
         BDDMockito.given(bookService.getById(id))
                 .willReturn( Optional.of(updatingBook) );
 
-        Book updatedBook = Book.builder().id(1l).title(createNewBookDTO().getTitle()).author(createNewBookDTO().getAuthor()).isbn(createNewBookDTO().getIsbn()).build();
+        Book updatedBook = Book.builder().id(1L).title(createNewBookDTO().getTitle()).author(createNewBookDTO().getAuthor()).isbn(createNewBookDTO().getIsbn()).build();
         BDDMockito.given(bookService.update( Mockito.any() ))
                 .willReturn( updatedBook );
 
@@ -245,7 +248,7 @@ public class BookControllerTest {
     @DisplayName("Deve filtrar livros")
     public void findBooksTest() throws Exception {
         // cenário
-        Long id = 1l;
+        Long id = 1L;
         Book book = Book.builder()
                             .id(id)
                             .title(createNewBookDTO().getTitle())
@@ -254,7 +257,7 @@ public class BookControllerTest {
                             .build();
 
         BDDMockito.given( bookService.find( Mockito.any(Book.class), Mockito.any(Pageable.class) ) )
-                .willReturn( new PageImpl<Book>( Arrays.asList(book), PageRequest.of(0, 100), 1) );
+                .willReturn(new PageImpl<>(Arrays.asList(book), PageRequest.of(0, 100), 1) );
 
         String queryString = String.format("?title=%s&author=%s&page=0&size=100",
                 book.getTitle(), book.getAuthor());

@@ -50,7 +50,6 @@ O Springdoc - OpenAPI 3 foi utilizado para gerar automaticamente a documentaçã
 
 Projeto está hospedado no Heroku e podemos usar o Insomnia para testar os nossos endpoints.
 
----
 
 ## ⚙️ Funcionalidades
 
@@ -68,20 +67,14 @@ Projeto está hospedado no Heroku e podemos usar o Insomnia para testar os nosso
   - [x] Obter uma lista de empréstimos através de parâmetros (customer e isbn livro).
 
 
-Links:
+## Links
 
-https://github.com/anderson-sfoliveira/admin-apps
-https://github.com/anderson-sfoliveira/library-api
-https://app.travis-ci.com/github/anderson-sfoliveira/library-api/branches
-https://app.codecov.io/gh/anderson-sfoliveira/library-api/new
-https://dashboard.heroku.com/apps/library-api-mycloud
-https://library-api-mycloud.herokuapp.com/
-https://library-api-mycloud.herokuapp.com/actuator/swagger-ui/index.html
+-   **[URL da API](https://library-api-mycloud.herokuapp.com/)**
+-   **[Documentação API](https://library-api-mycloud.herokuapp.com/actuator/swagger-ui/index.html)**
+-   **[Travis CI](https://app.travis-ci.com/github/anderson-sfoliveira/library-api/branches)**
+-   **[Codecov](https://app.codecov.io/gh/anderson-sfoliveira/library-api/new)**
+-   **[GitHub da aplicação admin-apps](https://github.com/anderson-sfoliveira/admin-apps)**
 
-Git do curso : https://github.com/dougllasfps/library-api
-
-
----
 
 ## 🚀 Como executar o projeto
 
@@ -106,7 +99,7 @@ $ git clone https://github.com/anderson-sfoliveira/library-api.git
 # O servidor inciará na porta:8080
 
 ```
----
+
 
 ## 🛠 Tecnologias
 
@@ -143,7 +136,6 @@ Quando criar um PR (pull request), o seu CI irá enviar o relatório de cobertur
 Essa ferramenta é extremamente útil em ambiente local de desenvolvimento, porque o envio de e-mail fica centralizado e através da ferramenta é muito mais fácil analisar o conteúdo do e-mail.
 -   **[CronMaker](http://www.cronmaker.com/)**
 
----
 
 ## 🦸🏾 Autor
 
@@ -158,7 +150,6 @@ Essa ferramenta é extremamente útil em ambiente local de desenvolvimento, porq
 
 Feito com ❤️ por Anderson Oliveira 👋🏽 Entre em contato!
 
----
 
 ## 📝 Licença
 

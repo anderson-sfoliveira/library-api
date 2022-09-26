@@ -1,16 +1,16 @@
 package br.com.brlsistemas.libraryapi.api.security;
 
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
-
-import javax.servlet.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+//import org.springframework.core.Ordered;
+//import org.springframework.core.annotation.Order;
+//import org.springframework.stereotype.Component;
+//
+//import javax.servlet.*;
+//import javax.servlet.http.HttpServletRequest;
+//import javax.servlet.http.HttpServletResponse;
+//import java.io.IOException;
+//import java.util.Arrays;
+//import java.util.HashSet;
+//import java.util.Set;
 public class CorsFilter {}
 //@Component
 //@Order(Ordered.HIGHEST_PRECEDENCE)

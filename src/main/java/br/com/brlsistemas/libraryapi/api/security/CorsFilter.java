@@ -23,7 +23,7 @@ public class CorsFilter implements Filter {
 	 * verificar se a origem tem permissão para acessar a API.
 	 */
 
-	private final String[] originPermitida = {"https://library-api-mycloud.herokuapp.com/"};
+	private final String[] originPermitida = {"https://library-api-mycloud.herokuapp.com"};
 	
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

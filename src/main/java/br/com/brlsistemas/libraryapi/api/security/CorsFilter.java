@@ -25,8 +25,9 @@ public class CorsFilter implements Filter {
 
 //	private final String[] originPermitida = {"http://localhost:9090"};
 //	private final String[] originPermitida = {"http://localhost:9090", "https://library-api-mycloud.herokuapp.com/"};
-	private final String[] originPermitida = {"https://library-api-mycloud.herokuapp.com"};
+//	private final String[] originPermitida = {"https://library-api-mycloud.herokuapp.com"};
 //	private final String[] originPermitida = {"https://library-api-mycloud.herokuapp.com/actuator"};
+private final String[] originPermitida = {"http://b729c101-e727-4100-9800-9b25cc2a5263.prvt.dyno.rt.heroku.com:9090"};
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)

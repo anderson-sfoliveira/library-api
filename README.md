@@ -71,7 +71,7 @@ Projeto está hospedado no Heroku e podemos usar o Insomnia para testar os nosso
 ## Links
 
 -   **[URL da API](https://library-api-mycloud.herokuapp.com/)**
--   **[Documentação API](https://library-api-mycloud.herokuapp.com/actuator/swagger-ui/index.html)**
+-   **[Documentação API](https://library-api-mycloud.herokuapp.com/swagger-ui/index.html)**
 -   **[Travis CI](https://app.travis-ci.com/github/anderson-sfoliveira/library-api/branches)**
 -   **[Codecov](https://app.codecov.io/gh/anderson-sfoliveira/library-api/new)**
 -   **[GitHub da aplicação admin-apps](https://github.com/anderson-sfoliveira/admin-apps)**

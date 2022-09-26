@@ -32,6 +32,11 @@ public class BookController {
     private final ModelMapper modelMapper;
     private final LoanService loanService;
 
+    @GetMapping("/test-git-actions")
+    public String testGitAction(){
+        return "Teste git action!";
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     @Operation(

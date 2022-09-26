@@ -24,33 +24,48 @@ Tabela de conteúdos
 
 ## 💻 Sobre o projeto
 
-Aqui você coloca o objetivo do projeto.
+Desenvolvido durante o curso **Design de API's RestFul com Spring Boot, TDD e o novo JUnit5** oferecido pela [Udemy](https://www.udemy.com/course/design-de-apis-restful-com-tdd-spring-boot-e-junit-5/).
 
-Exemplos:
+Esta API realiza o controle de uma biblioteca.
 
-Projeto desenvolvido durante o curso **Spring e Injeção de Dependências** oferecido pela [Algaworks](https://www.algaworks.com/).
+O projeto foi desenvolvido utilizando as técnicas TDD e BDD onde os testes são escritos antes mesmo dos códigos.
 
-Projeto desenvolvido durante a **NLW - Next Level Week** oferecida pela [Rocketseat](https://blog.rocketseat.com.br/primeira-next-level-week/).
+Os testes foram escritos utilizando Junit5, Mockito e Assertj, que fazem parte do Spring Boot Starter Test.
+
+Criamos um scheduling (agendamento) para envio de e-mail com Spring Boot Starter Mail para livros emprestados a mais de 3 dias.
+
+Utilizamos o Mailtrap para simular e-mails.
+
+Utilizamos o Spring Boot Starter Actuator para monitorar as informações e status da aplicação.
+
+Criar outra aplicação utilizando com o Spring Boot Admin para fornecer uma interface administrativa para aplicativos Spring Boot.
+
+Utilizamos o H2 como banco de dados em memória, o lombok e o modelmapper para conversão de DTO.
+
+Utilizamos o Jacoco como ferramenta de cobertura de código, que é usada para medir quantas linhas do nosso código são testadas.
+
+Projeto está no Github, hospedado no Heroku, utilizamos o Travis CI para integração contínua onde é testado o build e os testes da nossa aplicação e no Codecov visualizamos o resultado da análise da cobertura de código.
+
+Utilizamos o Springdoc - OpenAPI 3 (version 1.6.11) que gera automaticamente a documentação da API junto com algumas anotações Swagger.
+
+Utilizamos o Insomnia para testar nossos endpoints.
 
 ---
 
-## ⚙️ Funcionalidades (opcional)
+## ⚙️ Funcionalidades
 
-- [x] Empresas ou entidades podem se cadastrar na plataforma web enviando:
-    - [x] uma imagem do ponto de coleta
-    - [x] nome da entidade, email e whatsapp
-    - [x] e o endereço para que ele possa aparecer no mapa
-    - [x] além de selecionar um ou mais ítens de coleta:
-        - lâmpadas
-        - pilhas e baterias
-        - papéis e papelão
-        - resíduos eletrônicos
-        - resíduos orgânicos
-        - óleo de cozinha
+- [x] API de livro:
+  - [x] Cadastrar um novo livro enviado o título, autor e isbn do livro;
+  - [x] Atualizar o titulo e autor do livro através do id;
+  - [x] Deletar um livro através do id;
+  - [x] Obter detalhes de um livro através do id;
+  - [x] Obter uma lista de livros através de parâmetros;
+  - [x] Obter uma lista de empréstimos através do id do livro.
 
-- [x] Os usuários tem acesso ao aplicativo móvel, onde podem:
-    - [x] navegar pelo mapa para ver as instituições cadastradas
-    - [x] entrar em contato com a entidade através do E-mail ou do WhatsApp
+- [x] API de empréstimos:
+  - [x] Cadastrar o empréstimo de um livro para um cliente;
+  - [x] Registrar a devolução do empréstimo;
+  - [x] Obter uma lista de empréstimos através de parâmetros (customer e isbn livro).
 
 ---
 
@@ -59,7 +74,9 @@ Projeto desenvolvido durante a **NLW - Next Level Week** oferecida pela [Rockets
 ### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina o Java 11 e o [Maven](https://maven.apache.org/).
-Além disto é bom ter um editor para trabalhar com o código, como o: [Intellij](https://www.jetbrains.com/pt-br/idea/).
+
+Além disto é bom ter um editor de código, como o: [Intellij](https://www.jetbrains.com/pt-br/idea/). E também o
+[Insomnia REST](https://insomnia.rest/) para testar os endpoints.
 
 #### 🎲 Rodando a API
 

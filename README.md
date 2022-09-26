@@ -45,7 +45,7 @@ Neste outro aplicativo são demonstradas as informações coletadas pelo Spring 
 O Jacoco foi a ferramenta escolhida para realizar a cobertura de código, usada para medir quantas linhas do nosso código são testadas.
 
 A integração contínua ficou por conta do Travis CI onde é testado o build e os testes da nossa aplicação.
-Os resultados dos testes são enviados para o Codecov, onde podemos visualizamos a análise da cobertura de código.
+Os resultados dos testes são enviados para o Codecov, onde podemos visualizar a análise da cobertura de código.
 
 O Springdoc - OpenAPI 3 foi utilizado para gerar automaticamente a documentação da API junto com algumas anotações Swagger.
 

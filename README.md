@@ -101,7 +101,7 @@ $ git clone https://github.com/anderson-sfoliveira/library-api.git
 
 # http://localhost:9090/actuator
 
-# http://localhost:9090/actuator/swagger-ui/index.html
+# http://localhost:8080/swagger-ui/index.html
 
 ```
 

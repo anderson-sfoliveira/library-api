@@ -99,6 +99,10 @@ $ git clone https://github.com/anderson-sfoliveira/library-api.git
 
 # O servidor inciará na porta:8080
 
+# http://localhost:9090/actuator
+
+# http://localhost:9090/actuator/swagger-ui/index.html
+
 ```
 
 

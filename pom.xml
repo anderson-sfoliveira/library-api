@@ -131,6 +131,7 @@ Failed to execute goal org.apache.maven.plugins:maven-resources-plugin:3.2.0:res
 				</executions>
 			</plugin>
 			<!-- Maven Compiler -->
+			<!--[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.10.1:compile (default-compile) on project ***: Fatal error compiling: invalid target release: 11-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>

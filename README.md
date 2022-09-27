@@ -3,6 +3,7 @@
 </h1>
 
 [![Build Status](https://app.travis-ci.com/anderson-sfoliveira/library-api.svg?branch=main)](https://app.travis-ci.com/anderson-sfoliveira/library-api)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/anderson-sfoliveira/library-api/Heroku%20Deployment)
 
 <h4 align="center">
 	🚧  Concluído  🚧

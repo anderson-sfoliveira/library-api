@@ -3,11 +3,8 @@
 </h1>
 
 [![Heroku Deployment](https://github.com/anderson-sfoliveira/library-api/actions/workflows/heroku-deployment.yml/badge.svg)](https://github.com/anderson-sfoliveira/library-api/actions/workflows/heroku-deployment.yml)
+[![codecov](https://codecov.io/gh/anderson-sfoliveira/library-api/branch/main/graph/badge.svg?token=FEC5XBGPHJ)](https://codecov.io/gh/anderson-sfoliveira/library-api)
 [![Build Status](https://app.travis-ci.com/anderson-sfoliveira/library-api.svg?branch=main)](https://app.travis-ci.com/anderson-sfoliveira/library-api)
-
-<h4 align="center">
-	🚧  Concluído  🚧
-</h4>
 
 Tabela de conteúdos
 =================

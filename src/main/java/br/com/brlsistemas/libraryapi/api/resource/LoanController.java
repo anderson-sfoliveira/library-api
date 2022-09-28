@@ -1,13 +1,11 @@
 package br.com.brlsistemas.libraryapi.api.resource;
 
-import br.com.brlsistemas.libraryapi.api.dto.BookDTO;
-import br.com.brlsistemas.libraryapi.api.dto.LoanDTO;
-import br.com.brlsistemas.libraryapi.api.dto.LoanFilterDTO;
-import br.com.brlsistemas.libraryapi.api.dto.ReturnedLoanDTO;
+import br.com.brlsistemas.libraryapi.api.dto.*;
 import br.com.brlsistemas.libraryapi.model.entity.Book;
 import br.com.brlsistemas.libraryapi.model.entity.Loan;
 import br.com.brlsistemas.libraryapi.service.BookService;
 import br.com.brlsistemas.libraryapi.service.LoanService;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
@@ -32,8 +30,8 @@ public class LoanController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-//    @ApiOperation("Creates a loan")
-    public Long createLoan(@RequestBody LoanDTO loanDTO){
+    @Operation(summary = "Creates a loan")
+    public Long createLoan(@RequestBody LoanCreateDTO loanDTO){
         Book book = bookService.getBookByIsbn(loanDTO.getIsbn())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.BAD_REQUEST, "Book not found for passed Isbn"));
 
@@ -48,7 +46,7 @@ public class LoanController {
     }
 
     @PatchMapping("{id}")
-//    @ApiOperation("Return loaned book")
+    @Operation(summary = "Return loaned book")
     public void returnBook( @PathVariable Long id, @RequestBody ReturnedLoanDTO returnedLoanDTO ) {
         Loan loan = loanService.getById(id).orElseThrow( () -> new ResponseStatusException(HttpStatus.NOT_FOUND) );
         loan.setReturned(returnedLoanDTO.getReturned());
@@ -56,7 +54,7 @@ public class LoanController {
     }
 
     @GetMapping
-//    @ApiOperation("Find loan by params")
+    @Operation(summary = "Find loan by params")
     public Page<LoanDTO> find(LoanFilterDTO loanFilterDTO, Pageable pageable) {
         Page<Loan> result = loanService.find(loanFilterDTO, pageable);
         List<LoanDTO> loans = result

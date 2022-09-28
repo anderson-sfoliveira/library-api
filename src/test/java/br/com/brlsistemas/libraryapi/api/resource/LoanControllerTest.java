@@ -1,5 +1,6 @@
 package br.com.brlsistemas.libraryapi.api.resource;
 
+import br.com.brlsistemas.libraryapi.api.dto.LoanCreateDTO;
 import br.com.brlsistemas.libraryapi.api.dto.LoanDTO;
 import br.com.brlsistemas.libraryapi.api.dto.LoanFilterDTO;
 import br.com.brlsistemas.libraryapi.api.dto.ReturnedLoanDTO;
@@ -64,7 +65,7 @@ public class LoanControllerTest {
     @DisplayName("Deve realizar um empréstimo")
     public void createLoanTest() throws Exception {
         // cenário
-        LoanDTO loanDTO = LoanDTO.builder().isbn("123").customer("Fulano").customerEmail("fulano@email.com").build();
+        LoanCreateDTO loanDTO = LoanCreateDTO.builder().isbn("123").customer("Fulano").customerEmail("fulano@email.com").build();
         String json = new ObjectMapper().writeValueAsString(loanDTO);
 
         Book foundBook = Book.builder()
@@ -91,10 +92,10 @@ public class LoanControllerTest {
     }
 
     @Test
-    @DisplayName("Deve retornar erro ao tentar fazer empréstimo de livro inexistente.")
+    @DisplayName("Deve retornar erro ao tentar fazer empréstimo de um livro emprestado.")
     public void invalidIsbnCreateLoanTest() throws Exception {
         // cenário
-        LoanDTO loanDTO = LoanDTO.builder().isbn("123").customer("Fulano").build();
+        LoanCreateDTO loanDTO = LoanCreateDTO.builder().isbn("123").customer("Fulano").build();
         String json = new ObjectMapper().writeValueAsString(loanDTO);
 
         Book foundBook = Book.builder()
@@ -121,10 +122,10 @@ public class LoanControllerTest {
     }
 
     @Test
-    @DisplayName("Deve retornar erro ao tentar fazer empréstimo de um livro emprestado.")
+    @DisplayName("Deve retornar erro ao tentar fazer empréstimo de livro inexistente.")
     public void loanedBookErrorOnCreateLoanTest() throws Exception {
         // cenário
-        LoanDTO loanDTO = LoanDTO.builder().isbn("123").customer("Fulano").build();
+        LoanCreateDTO loanDTO = LoanCreateDTO.builder().isbn("123").customer("Fulano").build();
         String json = new ObjectMapper().writeValueAsString(loanDTO);
 
         BDDMockito.given( bookService.getBookByIsbn("123") ).willReturn( Optional.empty() );

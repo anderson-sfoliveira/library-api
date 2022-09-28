@@ -19,14 +19,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 				description = "API do projeto de bibliotecas",
 				version = "1.0",
 				contact = @Contact(name = "Anderson Oliveira", url = "https://github.com/anderson-sfoliveira", email = "anderson.sfoliveira@gmail.com")
-		),
-		servers = @Server(
-				url = "http://localhost:8080/",
-				description = "Descrição do Server",
-				variables = {
-						@ServerVariable(name = "serverUrl", defaultValue = "localhost"),
-						@ServerVariable(name = "serverHttpPort", defaultValue = "8080")
-				}))
+		)
+)
 public class LibraryApiApplication {
 
 //	@Autowired

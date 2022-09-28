@@ -1,6 +1,7 @@
 package br.com.brlsistemas.libraryapi.api.resource;
 
 import br.com.brlsistemas.libraryapi.api.dto.BookDTO;
+import br.com.brlsistemas.libraryapi.api.dto.BookUpdateDTO;
 import br.com.brlsistemas.libraryapi.model.entity.Book;
 import br.com.brlsistemas.libraryapi.exception.BusinessException;
 import br.com.brlsistemas.libraryapi.service.BookService;
@@ -197,7 +198,7 @@ public class BookControllerTest {
         // cenário  (given)
         Long id = 1L;
 
-        String json = new ObjectMapper().writeValueAsString( createNewBookDTO() );
+        String json = new ObjectMapper().writeValueAsString( createNewBookUpdateDTO() );
 
         Book updatingBook = Book.builder().id(1L).title("Titulo 1").author("Ander").isbn("123").build();
         BDDMockito.given(bookService.getById(id))
@@ -227,7 +228,7 @@ public class BookControllerTest {
     @DisplayName("Deve retornar resource not found quando nao encontrar o livro para atualizar")
     public void updateNonexistentBookTest() throws Exception {
         // cenário  (given)
-        String json = new ObjectMapper().writeValueAsString( createNewBookDTO() );
+        String json = new ObjectMapper().writeValueAsString( createNewBookUpdateDTO() );
 
         BDDMockito.given( bookService.getById(Mockito.anyLong()) )
                 .willReturn( Optional.empty() );
@@ -278,5 +279,9 @@ public class BookControllerTest {
 
     private static BookDTO createNewBookDTO() {
         return BookDTO.builder().author("Anderson").title("As aventuras").isbn("123456").build();
+    }
+
+    private static BookUpdateDTO createNewBookUpdateDTO() {
+        return BookUpdateDTO.builder().author("Anderson").title("As aventuras").build();
     }
 }
